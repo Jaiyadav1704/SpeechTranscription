@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Transcription</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+
+<body class="day-mode"> <!-- Initially set to day mode -->
+    <div id="container">
+        <h1>Speech Transcription</h1>
+        <div id="transcription-container">
+            <div id="transcription-text-wrapper">
+                
+                <form method="post" action="{% url 'save_transcription' %}">
+                    {% csrf_token %}
+                    <textarea id="transcription-text" name="text" placeholder="Transcription will appear here"></textarea>
+                    <button id="saveButton">Save Transcription</button>
+                </form>
+                <button id="copyButton">Copy Text</button>
+                <button id="recordButton">Record</button>
+                <button id="clearButton">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    {% if success %}
+    <script>
+        alert('Transcription saved successfully.');
+    </script>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
